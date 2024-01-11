@@ -57,59 +57,45 @@ st.markdown(f"""
     """, unsafe_allow_html=True)
 
 #%%
-st.markdown('<h1 class="big-font">Predict properties of bio-oil producted from co-liquefaction</h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="big-font">Prediction of gaseous compositions producted from liquefaction of biomass</h1>', unsafe_allow_html=True)
 
 
 # 输入字段布局
 col1, col2= st.columns(2)
-
-
-
 with col1:
     st.markdown(f'<div class="st-bc">', unsafe_allow_html=True)
     st.markdown('**Elementary compositions**')
-    C1 = st.number_input('C (wt.%)', min_value=0.0, value=50.0, step=0.1, key='c_sew_sludge')
-    H1 = st.number_input('H (wt.%)', min_value=0.0, value=5.0, step=0.1, key='h_sew_sludge')
-    o_sewage_sludge = st.number_input('O (wt.%)', min_value=0.0, value=40.0, step=0.1, key='o_sew_sludge')
-    s_sewage_sludge = st.number_input('S (wt.%)', min_value=0.0, value=0.5, step=0.1, key='s_sew_sludge')
-    n_sewage_sludge = st.number_input('N (wt.%)', min_value=0.0, value=1.5, step=0.1, key='n_sew_sludge')
-    ash_sewage_sludge = st.number_input('Ash (wt.%)', min_value=0.0, value=5.0, step=0.1, key='ash_sew_sludge')
+    C1 = st.number_input('C (wt.%)', min_value=0.0, value=50.0, step=0.1, key='C')
+    H1 = st.number_input('H (wt.%)', min_value=0.0, value=5.0, step=0.1, key='H')
+    N1 = st.number_input('N (wt.%)', min_value=0.0, value=1.5, step=0.1, key='N')
+    O1 = st.number_input('O (wt.%)', min_value=0.0, value=40.0, step=0.1, key='O')
+    ash1 = st.number_input('Ash (wt.%)', min_value=0.0, value=5.0, step=0.1, key='ash')
     st.markdown('</div>', unsafe_allow_html=True)
 with col2:
     st.markdown(f'<div class="st-ba">', unsafe_allow_html=True)
     st.markdown('**HTL conditions**')
-    c_algae_biomass = st.number_input('C (wt.%)', min_value=0.0, value=50.0, step=0.1, key='c_alg_biomass')
-    h_algae_biomass = st.number_input('H (wt.%)', min_value=0.0, value=6.0, step=0.1, key='h_alg_biomass')
-    o_algae_biomass = st.number_input('O (wt.%)', min_value=0.0, value=44.0, step=0.1, key='o_alg_biomass')
-    s_algae_biomass = st.number_input('S (wt.%)', min_value=0.0, value=0.0, step=0.1, key='s_alg_biomass')
-    n_algae_biomass = st.number_input('N (wt.%)', min_value=0.0, value=1.0, step=0.1, key='n_alg_biomass')
-    ash_algae_biomass = st.number_input('Ash (wt.%)', min_value=0.0, value=5.0, step=0.1, key='ash_alg_biomass')
+    SC1 = st.number_input('SC (%)', min_value=7.0, value=99.0, step=0.1, key='Solid_content')
+    T1 = st.number_input('Tempreature (°C)', min_value=0.0, value=4000, step=0.1, key='Temperature')
+    RT1 = st.number_input('Residence time (min)', min_value=0, value=100, step=0.1, key='Residence_time')
+    P1 = st.number_input('Pressure (MPa)', min_value=0.0, value=50.0, step=0.1, key='Pressure')
     st.markdown('</div>', unsafe_allow_html=True)
 
 # 收集所有输入数据
 input_features = {
-    'C_sewage_sludge': c_sewage_sludge,
-    'H_sewage_sludge': h_sewage_sludge,
-    'O_sewage_sludge': o_sewage_sludge,
-    'S_sewage_sludge': s_sewage_sludge,
-    'N_sewage_sludge': n_sewage_sludge,
-    'Ash_sewage_sludge': ash_sewage_sludge,
-    'C_algae_biomass': c_algae_biomass,
-    'H_algae_biomass': h_algae_biomass,
-    'O_algae_biomass': o_algae_biomass,
-    'S_algae_biomass': s_algae_biomass,
-    'N_algae_biomass': n_algae_biomass,
-    'Ash_algae_biomass': ash_algae_biomass,
-    'Temperature': temperature,
-    'Solid_content': solid_content,
-    'Residence_time': residence_time,
-    'Mass_ratio_sewage_sludge': mass_ratio_sewage_sludge,
-    'Mass_ratio_algae_biomass': mass_ratio_algae_biomass,
+    'C': C1,
+    'H': H1,
+    'N': N1,
+    'O': O1,
+    'ash':ash1,
+    'Solid_content': SC1,
+    'Temperature': T1,
+    'Residence_time': RT1,
+    'Pressure': P1,
 }
 #%%
 # 当用户点击预测按钮时执行
 # 在每列之上显示标题
-st.write('Prediction of bio-oil properties:')# 定义三列
+st.write('Prediction of gaseous compositions:')# 定义三列
 col1, col2, col3, col4 = st.columns(4)
 
 # 当用户点击预测按钮时执行
