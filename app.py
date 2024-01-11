@@ -27,10 +27,10 @@ def predict_properties(input_features):
     P1 = input_features['Pressure'] 
     RT1 = input_features['Residence_time']
     # 4. 合并输入特征并转换为 NumPy 数组
-    input_array = np.array([[C1,H1,N1,O1,ash1,SC1,T1,P1,RT1]])
-
+    x=[C1,H1,N1,O1,ash1,SC1,T1,P1,RT1]
+    x=np.array(x).reshape(1,9)
     # 5. 使用模型进行预测
-    prediction = model.predict(input_array)
+    prediction = model.predict(x)
     return prediction
 #%%
 # 使用 CSS 来自定义 Streamlit 应用的样式
@@ -88,7 +88,7 @@ input_features = {
     'Solid_content': SC1,
     'Temperature': T1,
     'Residence_time': RT1,
-    'Pressure': P1,
+    'Pressure': P1
 }
 #%%
 # 当用户点击预测按钮时执行
