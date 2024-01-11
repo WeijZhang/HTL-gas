@@ -79,9 +79,9 @@ with col2:
     st.markdown('</div>', unsafe_allow_html=True)
 
 # 收集所有输入数据
-input_features = { 'C': C1, 'H': H1, 'N': N1, 'O': O1,  'ash':ash1, 'Solid_content': SC1, 'Temperature': T1,
-    'Residence_time': RT1, 'Pressure': P1}
+#input_features = { 'C': C1, 'H': H1, 'N': N1, 'O': O1,  'ash':ash1, 'Solid_content': SC1, 'Temperature': T1,'Residence_time': RT1, 'Pressure': P1}
 #%%
+input_features = { 'C1': C, 'H1': H, 'N1': N, 'O1': O,  'ash1':ash, 'SC1': Solid_content, ' T1':Temperature, 'RT1': Residence_time, 'P1': Pressure}
 # 当用户点击预测按钮时执行
 # 在每列之上显示标题
 st.write('Prediction of gaseous compositions:')# 定义三列
