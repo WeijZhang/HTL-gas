@@ -1,10 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Dec  1 12:17:46 2023
 
-@author: A
-"""
-#%%
 import streamlit as st
 import pandas as pd
 from joblib import load
@@ -26,8 +20,6 @@ def predict_properties(input_features):
     T1 = input_features['Temperature']
     P1 = input_features['Pressure'] 
     RT1 = input_features['Residence_time']
-   
-
     # 4. 合并输入特征并转换为 NumPy 数组
     input_array = np.array([C1,H1,N1,O1,ash1,SC1,T1,P1,RT1])
 
