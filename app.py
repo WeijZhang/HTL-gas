@@ -4,7 +4,7 @@ import pandas as pd
 import pickle
 import numpy as np
 
-model=pickle.load('model.pkl','rb')
+model=pickle.load('model.pkl')
 
 
 # 定义一个函数来处理输入并进行预测
