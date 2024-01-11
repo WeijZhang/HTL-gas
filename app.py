@@ -95,10 +95,10 @@ if st.button('Predict'):
     H2 = prediction[:, 3]
 
     # 在三列中显示预测结果
-    col1.write(f'CO2 (mol/kg): {CO2:}')
-    col2.write(f'CH4 (mol/kg): {CH4:}')
-    col3.write(f'CO (mol/kg): {CO:}')
-    col4.write(f'H2 (mol/kg): {H2:}')
+    col1.write(f'CO2 (mol/kg):CO2')
+    col2.write(f'CH4 (mol/kg): CH4')
+    col3.write(f'CO (mol/kg): CO:')
+    col4.write(f'H2 (mol/kg): H2')
 else:
     # 按钮未点击时也在三列中显示标签
     col1.write('CO2 (mol/kg) =')
