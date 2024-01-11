@@ -89,10 +89,10 @@ col1, col2, col3, col4 = st.columns(4)
 if st.button('Predict'):
     prediction = predict_properties(input_features)
     # 提取每个预测值并格式化
-    CO2 = prediction[:, 0]  # 假设预测结果是一个二维数组
-    CH4 = prediction[:, 1]
-    CO = prediction[:, 2]
-    H2 = prediction[:, 3]
+    #CO2 = prediction[:, 0]  # 假设预测结果是一个二维数组
+    #CH4 = prediction[:, 1]
+    #CO = prediction[:, 2]
+    #H2 = prediction[:, 3]
 
     # 在三列中显示预测结果
     col1.write(f'CO2 (mol/kg): prediction[:, 0]')
