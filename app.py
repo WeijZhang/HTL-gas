@@ -17,31 +17,19 @@ model = load(MODEL_PATH)
 
 # 定义一个函数来处理输入并进行预测
 def predict_properties(input_features):
-    # 1. 定义 RM_SS 和 RM_AB
-    RM_SS = input_features['Mass_ratio_sewage_sludge'] / 100
-    RM_AB = input_features['Mass_ratio_algae_biomass'] / 100
-
-    # 2. 计算 RM_C, RM_H, RM_O, RM_S, RM_N, RM_Ash
-    RM_C = input_features['C_sewage_sludge'] * RM_SS + input_features['C_algae_biomass'] * RM_AB
-    RM_H = input_features['H_sewage_sludge'] * RM_SS + input_features['H_algae_biomass'] * RM_AB
-    RM_O = input_features['O_sewage_sludge'] * RM_SS + input_features['O_algae_biomass'] * RM_AB
-    RM_S = input_features['S_sewage_sludge'] * RM_SS + input_features['S_algae_biomass'] * RM_AB
-    RM_N = input_features['N_sewage_sludge'] * RM_SS + input_features['N_algae_biomass'] * RM_AB
-    RM_Ash = input_features['Ash_sewage_sludge'] * RM_SS + input_features['Ash_algae_biomass'] * RM_AB
-
-    # 3. 计算 RM_HC, RM_OC, RM_NC
-    RM_HC = (12 * RM_H) / (1 * RM_C)
-    RM_OC = (16 * RM_O) / (16 * RM_C)
-    RM_NC = (14 * RM_N) / (16 * RM_C)
+    C1 = input_features['C'] 
+    H1 = input_features['H'] 
+    N1= input_features['N'] 
+    O1 = input_features['O'] 
+    ash1 = input_features['ash'] 
+    SC1 = input_features['Solid_content']
+    T1 = input_features['Temperature']
+    P1 = input_features['Pressure'] 
+    RT1 = input_features['Residence_time']
+   
 
     # 4. 合并输入特征并转换为 NumPy 数组
-    input_array = np.array([[
-        RM_C, RM_H, RM_O, RM_S, RM_N, RM_Ash, RM_HC, RM_OC, RM_NC,
-        input_features['Solid_content'],
-        input_features['Temperature'],
-        input_features['Residence_time'],
-        18, 1000, 84.93, 309
-    ]])
+    input_array = np.array([C1,H1,N1,O1,ash1,SC1,T1,P1,RT1])
 
     # 5. 使用模型进行预测
     prediction = model.predict(input_array)
@@ -73,15 +61,15 @@ st.markdown('<h1 class="big-font">Predict properties of bio-oil producted from c
 
 
 # 输入字段布局
-col1, col2, col3 = st.columns(3)
+col1, col2= st.columns(2)
 
 
 
 with col1:
     st.markdown(f'<div class="st-bc">', unsafe_allow_html=True)
-    st.markdown('**Sewage Sludge**')
-    c_sewage_sludge = st.number_input('C (wt.%)', min_value=0.0, value=50.0, step=0.1, key='c_sew_sludge')
-    h_sewage_sludge = st.number_input('H (wt.%)', min_value=0.0, value=5.0, step=0.1, key='h_sew_sludge')
+    st.markdown('**Elementary compositions**')
+    C1 = st.number_input('C (wt.%)', min_value=0.0, value=50.0, step=0.1, key='c_sew_sludge')
+    H1 = st.number_input('H (wt.%)', min_value=0.0, value=5.0, step=0.1, key='h_sew_sludge')
     o_sewage_sludge = st.number_input('O (wt.%)', min_value=0.0, value=40.0, step=0.1, key='o_sew_sludge')
     s_sewage_sludge = st.number_input('S (wt.%)', min_value=0.0, value=0.5, step=0.1, key='s_sew_sludge')
     n_sewage_sludge = st.number_input('N (wt.%)', min_value=0.0, value=1.5, step=0.1, key='n_sew_sludge')
@@ -89,7 +77,7 @@ with col1:
     st.markdown('</div>', unsafe_allow_html=True)
 with col2:
     st.markdown(f'<div class="st-ba">', unsafe_allow_html=True)
-    st.markdown('**Algae Biomass**')
+    st.markdown('**HTL conditions**')
     c_algae_biomass = st.number_input('C (wt.%)', min_value=0.0, value=50.0, step=0.1, key='c_alg_biomass')
     h_algae_biomass = st.number_input('H (wt.%)', min_value=0.0, value=6.0, step=0.1, key='h_alg_biomass')
     o_algae_biomass = st.number_input('O (wt.%)', min_value=0.0, value=44.0, step=0.1, key='o_alg_biomass')
@@ -97,15 +85,7 @@ with col2:
     n_algae_biomass = st.number_input('N (wt.%)', min_value=0.0, value=1.0, step=0.1, key='n_alg_biomass')
     ash_algae_biomass = st.number_input('Ash (wt.%)', min_value=0.0, value=5.0, step=0.1, key='ash_alg_biomass')
     st.markdown('</div>', unsafe_allow_html=True)
-with col3:
-    st.markdown(f'<div class="st-oc">', unsafe_allow_html=True)
-    st.markdown('**Operating Conditions**')
-    temperature = st.number_input('Temperature (°C)', min_value=0.0, value=300.0, step=0.1, key='temp')
-    solid_content = st.number_input('Solid content (%)', min_value=0.0, value=20.0, step=0.1, key='solid_cont')
-    residence_time = st.number_input('Residence time (min)', min_value=0.0, value=60.0, step=0.1, key='res_time')
-    mass_ratio_sewage_sludge = st.number_input('Mass ratio of Sewage sludge (%)', min_value=0.0, value=50.0, step=0.1, key='mass_ratio_sew')
-    mass_ratio_algae_biomass = st.number_input('Mass ratio of Algae biomass (%)', min_value=0.0, value=50.0, step=0.1, key='mass_ratio_alg')
-    st.markdown('</div>', unsafe_allow_html=True)
+
 # 收集所有输入数据
 input_features = {
     'C_sewage_sludge': c_sewage_sludge,
@@ -130,26 +110,29 @@ input_features = {
 # 当用户点击预测按钮时执行
 # 在每列之上显示标题
 st.write('Prediction of bio-oil properties:')# 定义三列
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 
 # 当用户点击预测按钮时执行
 if st.button('Predict'):
     prediction = predict_properties(input_features)
     
     # 提取每个预测值并格式化
-    yield_oil = prediction[0, 0]  # 假设预测结果是一个二维数组
-    n_oil = prediction[0, 1]
-    er_oil = prediction[0, 2]
+    CO2 = prediction[:, 0]  # 假设预测结果是一个二维数组
+    CH4 = prediction[:, 1]
+    CO = prediction[:, 2]
+    H2 = prediction[:, 3]
 
     # 在三列中显示预测结果
-    col1.write(f'Yield_oil (%): {yield_oil:.2f}')
-    col2.write(f'N_oil (%): {n_oil:.2f}')
-    col3.write(f'ER_oil (%): {er_oil:.2f}')
+    col1.write(f'CO2 (mol/kg): {CO2:.2f}')
+    col2.write(f'CH4 (mol/kg): {CH4:.2f}')
+    col3.write(f'CO (mol/kg): {CO:.2f}')
+    col4.write(f'H2 (mol/kg): {H2:.2f}')
 else:
     # 按钮未点击时也在三列中显示标签
-    col1.write('Yield_oil (%) =')
-    col2.write('N_oil (%) =')
-    col3.write('ER_oil (%) =')
+    col1.write('CO2 (mol/kg) =')
+    col2.write('CH4 (mol/kg) =')
+    col3.write('CO (mol/kg) =')
+    col4.write('H2 (mol/kg) =')
 
 
 #%%
