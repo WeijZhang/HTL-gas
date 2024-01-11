@@ -1,16 +1,12 @@
-
 import streamlit as st
 import pandas as pd
-import joblib
+from joblib import load
 import numpy as np
-import os
 
-
-import pickle
-
-# 从文件中加载模型
-with open('model.pkl', 'rb') as file:
-    model = pickle.load(file)
+# 请确保model.pkl的路径与实际路径相匹配
+MODEL_PATH = 'model.pkl'
+# 载入预先训练好的模型
+model = load(MODEL_PATH)
 
 # 定义一个函数来处理输入并进行预测
 def predict_properties(input_features):
