@@ -79,7 +79,7 @@ with col2:
     st.markdown('</div>', unsafe_allow_html=True)
 
 # 收集所有输入数据
-input_features = { 'C': C1, 'H': H1, 'N': N1, 'O': O1,  'ash':ash1, 'Solid_content': SC1, 'Temperature': T1,'Residence_time': RT1, 'Pressure': P1}
+input_features = {'C': C1, 'H': H1, 'N': N1, 'O': O1, 'ash':ash1, 'Solid_content': SC1, 'Temperature': T1,'Residence_time': RT1, 'Pressure': P1}
 #%%
 #input_features = { 'C1': C, 'H1': H, 'N1': N, 'O1': O,  'ash1':ash, 'SC1': Solid_content, ' T1':Temperature, 'RT1': Residence_time, 'P1': Pressure}
 # 当用户点击预测按钮时执行
@@ -95,10 +95,10 @@ if st.button('Predict'):
     #H2 = prediction[:, 3]
 
     # 在三列中显示预测结果
-    col1.write(f'CO2 (mol/kg): prediction[0]')
-    col2.write(f'CH4 (mol/kg): prediction[1]')
-    col3.write(f'CO (mol/kg): prediction[2]')
-    col4.write(f'H2 (mol/kg): prediction[3]')
+    col1.write(f'CO2 (mol/kg): prediction[:,0]')
+    col2.write(f'CH4 (mol/kg): prediction[:,1]')
+    col3.write(f'CO (mol/kg): prediction[:,2]')
+    col4.write(f'H2 (mol/kg): prediction[:,3]')
 else:
     # 按钮未点击时也在三列中显示标签
     col1.write('CO2 (mol/kg) =')
