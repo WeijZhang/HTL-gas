@@ -73,7 +73,7 @@ with col2:
     st.markdown(f'<div class="st-ba">', unsafe_allow_html=True)
     st.markdown('**HTL conditions**')
     SC1 = st.number_input('SC (%)', min_value=7.0, value=99.0, step=0.1, key='Solid_content')
-    T1 = st.number_input('Tempreature (C)', min_value=0.0, value=400, step=0.1, key='Temperature')
+    T1 = st.number_input('Tempreature (C)', min_value=0.0, value=400.0, step=0.1, key='Temperature')
     RT1 = st.number_input('Residence time (min)', min_value=0, value=100, step=0.1, key='Residence_time')
     P1 = st.number_input('Pressure (MPa)', min_value=0.0, value=50.0, step=0.1, key='Pressure')
     st.markdown('</div>', unsafe_allow_html=True)
