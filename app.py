@@ -1,10 +1,10 @@
 
 import streamlit as st
 import pandas as pd
-import pickle
+from pickle import load
 import numpy as np
 
-model=pickle.load('model.pkl')
+model=load('model.pkl')
 
 
 # 定义一个函数来处理输入并进行预测
