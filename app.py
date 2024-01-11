@@ -82,7 +82,7 @@ with col2:
 input_features = { 'C': C1, 'H': H1, 'N': N1, 'O': O1,  'ash':ash1, 'Solid_content': SC1, 'Temperature': T1,
     'Residence_time': RT1, 'Pressure': P1}
 #%%
-input_features=np.array(input_features).reshape(1,9)
+
 # 当用户点击预测按钮时执行
 # 在每列之上显示标题
 st.write('Prediction of gaseous compositions:')# 定义三列
@@ -90,7 +90,7 @@ col1, col2, col3, col4 = st.columns(4)
 
 # 当用户点击预测按钮时执行
 if st.button('Predict'):
-    prediction = predict_properties(input_features)
+    prediction = predict_properties(np.array(input_features).reshape(1,9))
     
     # 提取每个预测值并格式化
     CO2 = prediction[:, 0]  # 假设预测结果是一个二维数组
