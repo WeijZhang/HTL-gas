@@ -1,11 +1,13 @@
 
 import streamlit as st
 import pandas as pd
-from pickle import load
+import joblib
 import numpy as np
 import os
-model=load('model.pkl')
 
+
+model_pkl_path = 'model.pkl'
+model = joblib.load(model_pkl_path)
 
 # 定义一个函数来处理输入并进行预测
 def predict_properties(input_features):
