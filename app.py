@@ -6,8 +6,11 @@ import numpy as np
 import os
 
 
-model_pkl_path = 'model.pkl'
-model = joblib.load(model_pkl_path)
+import pickle
+
+# 从文件中加载模型
+with open('model.pkl', 'rb') as file:
+    model = pickle.load(file)
 
 # 定义一个函数来处理输入并进行预测
 def predict_properties(input_features):
