@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Dec  1 12:17:46 2023
+
+@author: A
+"""
+#%%
 import streamlit as st
 import pandas as pd
 from joblib import load
